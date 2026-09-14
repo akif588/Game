@@ -1,13 +1,375 @@
-<html>
-  <body>
-   <!-- BEGIN AADS AD UNIT 2455274 -->
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTools & Termux Multi-Tool Hub</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-color: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border-color: #334155;
+        }
 
-<div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
-          <iframe data-aa='2455274' src='//acceptable.a-ads.com/2455274/?size=Adaptive'
-                            style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header h1 {
+            color: var(--accent-color);
+            font-size: 2rem;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+        }
+
+        /* Reklam Alanı Çerçevesi */
+        .ad-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px dashed var(--border-color);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .main-container {
+            width: 100%;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Navigasyon / Sekmeler */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background-color: var(--accent-color);
+            color: #000;
+            border-color: var(--accent-color);
+        }
+
+        /* İçerik Kartları */
+        .content-area {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+        }
+
+        .tool-panel {
+            display: none;
+        }
+
+        .tool-panel.active {
+            display: block;
+        }
+
+        .tool-panel h2 {
+            color: var(--accent-color);
+            margin-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        /* Form Elemanları */
+        input, select, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 8px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-size: 0.95rem;
+        }
+
+        button.action-btn {
+            background-color: var(--accent-color);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            transition: opacity 0.2s;
+        }
+
+        button.action-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Komut Listesi (Termux) */
+        .cmd-item {
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cmd-code {
+            font-family: monospace;
+            color: #4ade80;
+        }
+
+        .copy-btn {
+            width: auto;
+            margin: 0;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            background: var(--border-color);
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .qr-output {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .qr-output img {
+            max-width: 200px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>⚡ Multi-Tool & Termux Hub</h1>
+        <p>Geliştiriciler ve Teknoloji Meraklıları İçin Pratik Çevrimiçi Araçlar</p>
+    </header>
+
+    <!-- REKLAM ALANI 1 (ÜST BANNER) -->
+    <div class="ad-container">
+        <!-- BEGIN AADS AD UNIT 2455274 -->
+        <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+            <iframe data-aa='2455274' src='//acceptable.a-ads.com/2455274/?size=Adaptive'
+                    style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+        </div>
+        <!-- END AADS AD UNIT 2455274 -->
+    </div>
+
+    <div class="main-container">
+        <!-- Sol Menü -->
+        <div class="sidebar">
+            <button class="tab-btn active" onclick="switchTab('termux')">💻 Termux Rehberi</button>
+            <button class="tab-btn" onclick="switchTab('password')">🔐 Şifre Oluşturucu</button>
+            <button class="tab-btn" onclick="switchTab('qr')">📱 QR Kod Üretici</button>
+            <button class="tab-btn" onclick="switchTab('text')">🔤 Base64 / URL Encode</button>
+            <button class="tab-btn" onclick="switchTab('ip')">🌐 IP Bilgim</button>
         </div>
 
-<!-- END AADS AD UNIT 2455274 -->
-    
-  </body>
+        <!-- Sağ İçerik Alanı -->
+        <div class="content-area">
+            
+            <!-- 1. TERMUX REHBERİ -->
+            <div id="termux" class="tool-panel active">
+                <h2>Termux Temel Komutlar & Kurulum</h2>
+                <p style="margin-bottom: 15px; color: var(--text-secondary);">Sık kullanılan Termux komutlarını tek tıkla kopyalayabilirsiniz:</p>
+                
+                <div class="cmd-item">
+                    <div>
+                        <strong>Paket Güncelleme:</strong><br>
+                        <span class="cmd-code">pkg update && pkg upgrade -y</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('pkg update && pkg upgrade -y')">Kopyala</button>
+                </div>
+
+                <div class="cmd-item">
+                    <div>
+                        <strong>Depolama İzni Alma:</strong><br>
+                        <span class="cmd-code">termux-setup-storage</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('termux-setup-storage')">Kopyala</button>
+                </div>
+
+                <div class="cmd-item">
+                    <div>
+                        <strong>Python & Git Kurulumu:</strong><br>
+                        <span class="cmd-code">pkg install python git -y</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('pkg install python git -y')">Kopyala</button>
+                </div>
+
+                <div class="cmd-item">
+                    <div>
+                        <strong>Node.js Kurulumu:</strong><br>
+                        <span class="cmd-code">pkg install nodejs -y</span>
+                    </div>
+                    <button class="copy-btn" onclick="copyText('pkg install nodejs -y')">Kopyala</button>
+                </div>
+            </div>
+
+            <!-- 2. ŞİFRE OLUŞTURUCU -->
+            <div id="password" class="tool-panel">
+                <h2>Güçlü Şifre Oluşturucu</h2>
+                <label>Şifre Uzunluğu:</label>
+                <input type="number" id="passLength" value="16" min="6" max="64">
+                <button class="action-btn" onclick="generatePassword()">Şifre Üret</button>
+                <input type="text" id="passResult" readonly placeholder="Oluşturulan şifre burada görünecek">
+                <button class="copy-btn" style="width:100%" onclick="copyText(document.getElementById('passResult').value)">Şifreyi Kopyala</button>
+            </div>
+
+            <!-- 3. QR KOD OLUŞTURUCU -->
+            <div id="qr" class="tool-panel">
+                <h2>QR Kod Oluşturucu</h2>
+                <label>Metin veya URL Girin:</label>
+                <input type="text" id="qrInput" placeholder="https://ornek.com">
+                <button class="action-btn" onclick="generateQR()">QR Kod Üret</button>
+                <div class="qr-output" id="qrResult"></div>
+            </div>
+
+            <!-- 4. BASE64 & URL ENCODER -->
+            <div id="text" class="tool-panel">
+                <h2>Base64 & URL Metin İşleyici</h2>
+                <textarea id="textInput" rows="4" placeholder="Dönüştürmek istediğiniz metni buraya yazın..."></textarea>
+                <div style="display: flex; gap: 10px;">
+                    <button class="action-btn" onclick="processText('b64e')">Base64 Encode</button>
+                    <button class="action-btn" onclick="processText('b64d')">Base64 Decode</button>
+                </div>
+                <textarea id="textOutput" rows="4" readonly placeholder="Sonuç..."></textarea>
+            </div>
+
+            <!-- 5. IP BİLGİSİ -->
+            <div id="ip" class="tool-panel">
+                <h2>Ağ ve IP Adresi Bilgisi</h2>
+                <button class="action-btn" onclick="getIPInfo()">IP Bilgilerini Getir</button>
+                <div id="ipResult" style="margin-top: 15px; line-height: 1.8;"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- REKLAM ALANI 2 (ALT BANNER) -->
+    <div class="ad-container" style="margin-top: 30px;">
+        <!-- BEGIN AADS AD UNIT 2455274 -->
+        <div id="frame" style="width: 100%;margin: auto;position: relative; z-index: 99998;">
+            <iframe data-aa='2455274' src='//acceptable.a-ads.com/2455274/?size=Adaptive'
+                    style='border:0; padding:0; width:70%; height:auto; overflow:hidden;display: block;margin: auto'></iframe>
+        </div>
+        <!-- END AADS AD UNIT 2455274 -->
+    </div>
+
+    <script>
+        // Sekme Değiştirme
+        function switchTab(tabId) {
+            document.querySelectorAll('.tool-panel').forEach(panel => panel.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // Metin Kopyalama Fonksiyonu
+        function copyText(text) {
+            if(!text) return;
+            navigator.clipboard.writeText(text);
+            alert('Kopyalandı: ' + text);
+        }
+
+        // Şifre Üretici
+        function generatePassword() {
+            const length = document.getElementById('passLength').value;
+            const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+~`|}{[]:;?><,./-=";
+            let retVal = "";
+            for (let i = 0, n = charset.length; i < length; ++i) {
+                retVal += charset.charAt(Math.floor(Math.random() * n));
+            }
+            document.getElementById('passResult').value = retVal;
+        }
+
+        // QR Kod Üretici
+        function generateQR() {
+            const input = document.getElementById('qrInput').value;
+            const qrResult = document.getElementById('qrResult');
+            if(!input) {
+                alert('Lütfen bir metin veya URL girin!');
+                return;
+            }
+            qrResult.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(input)}" alt="QR Code">`;
+        }
+
+        // Base64 Metin İşlemleri
+        function processText(type) {
+            const input = document.getElementById('textInput').value;
+            const output = document.getElementById('textOutput');
+            try {
+                if(type === 'b64e') output.value = btoa(input);
+                if(type === 'b64d') output.value = atob(input);
+            } catch(e) {
+                alert('Hatalı veri biçimi!');
+            }
+        }
+
+        // IP Bilgisi
+        async function getIPInfo() {
+            const container = document.getElementById('ipResult');
+            container.innerHTML = "Yükleniyor...";
+            try {
+                const res = await fetch('https://ipapi.co/json/');
+                const data = await res.json();
+                container.innerHTML = `
+                    <p><strong>IP Adresi:</strong> ${data.ip}</p>
+                    <p><strong>Şehir / Ülke:</strong> ${data.city}, ${data.country_name}</p>
+                    <p><strong>İnternet Servis Sağlayıcı (ISP):</strong> ${data.org}</p>
+                `;
+            } catch(e) {
+                container.innerHTML = "IP bilgisi alınamadı. (Reklam engelleyici kapalı mı?)";
+            }
+        }
+    </script>
+</body>
 </html>
